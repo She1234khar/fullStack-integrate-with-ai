@@ -1,4 +1,10 @@
-// ... existing code ...
+const express = require('express');
+const router = express.Router();
+const { askGemini } = require('../helpers/gemini');
+const Product = require('../models/Product');
+const Review = require('../models/Review');
+const Order = require('../models/Order');
+
 // 1. Product Q&A
 router.post('/qa', async (req, res) => {
   try {
@@ -31,7 +37,7 @@ Answer (be creative, detailed, and match the user's language):
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ...
+
 // 2. Product Summary
 router.get('/summary/:productId', async (req, res) => {
   try {
@@ -64,7 +70,7 @@ Recent Reviews: ${reviews.map(r => r.comment).join('\n')}
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ...
+
 // 3. Smart Search
 router.post('/search', async (req, res) => {
   try {
@@ -77,7 +83,7 @@ router.post('/search', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ...
+
 // 4. Product Recommendations
 router.post('/recommend', async (req, res) => {
   try {
@@ -97,7 +103,7 @@ router.post('/recommend', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ...
+
 // 5. AI Chatbot
 router.post('/chat', async (req, res) => {
   try {
@@ -110,7 +116,7 @@ router.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ...
+
 // 6. Category-wise Discount Finder
 router.get('/discounts', async (req, res) => {
   try {
@@ -135,7 +141,7 @@ router.get('/discounts', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ...
+
 // 7. AI Review Summary
 router.get('/review-summary/:productId', async (req, res) => {
   try {
@@ -149,4 +155,5 @@ router.get('/review-summary/:productId', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// ... existing code ... 
+
+module.exports = router; 
