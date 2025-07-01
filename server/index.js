@@ -12,6 +12,7 @@ const shopAddressRouter = require('./routes/shop/address-routes')
 const shopOrderRouter = require('./routes/shop/order-routes')
 const shopSearchRouter = require('./routes/shop/search-routes')
 const shopReviewRouter = require('./routes/shop/review-routes')
+const aiRoutes = require('./routes/ai-routes')
 const path = require('path');
 
 const app = express();
@@ -45,6 +46,7 @@ app.use('/api/shop/address', shopAddressRouter);
 app.use('/api/shop/order', shopOrderRouter);
 app.use('/api/shop/search', shopSearchRouter);
 app.use('/api/shop/reviews', shopReviewRouter);
+app.use('/api/ai', aiRoutes);
 
 // API 404 handler
 app.get('/api/*', (req, res) => {
