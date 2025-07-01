@@ -12,7 +12,6 @@ const shopAddressRouter = require('./routes/shop/address-routes')
 const shopOrderRouter = require('./routes/shop/order-routes')
 const shopSearchRouter = require('./routes/shop/search-routes')
 const shopReviewRouter = require('./routes/shop/review-routes')
-const aiRoutes = require('./routes/ai-routes')
 const path = require('path');
 
 const app = express();
@@ -23,7 +22,7 @@ const port = process.env.PORT || 5000;
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.CLIENT_BASE_URL || 'http://localhost:5173',
+  origin: 'https://fullstack-integrate-with-ai-2.onrender.com',
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   allowedHeaders: [
     'Content-Type',
@@ -46,20 +45,10 @@ app.use('/api/shop/address', shopAddressRouter);
 app.use('/api/shop/order', shopOrderRouter);
 app.use('/api/shop/search', shopSearchRouter);
 app.use('/api/shop/reviews', shopReviewRouter);
-app.use('/api/ai', aiRoutes);
 
 // API 404 handler
 app.get('/api/*', (req, res) => {
   res.status(404).json({ message: 'API route not found' });
-});
-
-// Serve static files
-const frontendPath = path.join(__dirname, '..', 'fronted1', 'fronted2', 'dist');
-app.use(express.static(frontendPath));
-
-// Serve React app for all other routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 // Error handling middleware
