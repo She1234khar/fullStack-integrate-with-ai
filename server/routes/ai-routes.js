@@ -119,6 +119,7 @@ router.post('/chat', async (req, res) => {
 
 // 6. Category-wise Discount Finder
 router.get('/discounts', async (req, res) => {
+  console.log('DISCOUNTS ROUTE HIT');
   try {
     const discountedProducts = await Product.aggregate([
       {
