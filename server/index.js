@@ -48,9 +48,16 @@ app.use('/api/shop/search', shopSearchRouter);
 app.use('/api/shop/reviews', shopReviewRouter);
 app.use('/api/ai', aiRoutes);
 
-// API 404 handler
-app.get('/api/*', (req, res) => {
-  res.status(404).json({ message: 'API route not found' });
+// Serve static files from the Vite build
+app.use(express.static(path.join(__dirname, '..', 'fronted1', 'fronted2', 'dist')));
+
+// For any non-API route, serve index.html (for React Router)
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '..', 'fronted1', 'fronted2', 'dist', 'index.html'));
+  } else {
+    res.status(404).json({ message: 'API route not found' });
+  }
 });
 
 // Error handling middleware
